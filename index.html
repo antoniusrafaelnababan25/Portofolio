@@ -3,62 +3,133 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rafael Antonius Nababan - Portfolio</title>
+    <title>Rafael Antonius Nababan - Portfolio Profesional</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/785/785116.png" type="image/svg+xml">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <style>
+    :root {
+        --gold: #D4AF37;
+        --gold-light: #FFD700;
+        --dark: #0a0a0a;
+        --darker: #050505;
+        --dark-gray: #1a1a1a;
+        --light-gray: #e5e5e5;
+    }
+    
     body {
         font-family: 'Poppins', sans-serif;
         scroll-behavior: smooth;
+        background-color: var(--darker);
+        color: var(--light-gray);
+        overflow-x: hidden;
     }
-
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Raleway', sans-serif;
+    }
+    
     .hero-gradient {
-        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+        background: radial-gradient(circle at top right, #1a1a1a 0%, #0a0a0a 40%);
+        position: relative;
+        overflow: hidden;
     }
-
+    
+    .hero-gradient::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(0,0,0,0) 70%);
+        animation: rotate 20s linear infinite;
+        z-index: 0;
+    }
+    
     .btn-primary {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        transition: all 0.3s ease;
+        background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
     }
-
+    
+    .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: 0.6s;
+        z-index: -1;
+    }
+    
+    .btn-primary:hover::before {
+        left: 100%;
+    }
+    
     .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4);
     }
-
+    
     .feature-card {
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        background: rgba(255, 255, 255, 0.9);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        background: rgba(30, 30, 30, 0.7);
         backdrop-filter: blur(10px);
+        border: 1px solid rgba(212, 175, 55, 0.1);
+        position: relative;
+        overflow: hidden;
     }
-
+    
+    .feature-card::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, var(--gold), transparent, var(--gold));
+        z-index: -1;
+        border-radius: 16px;
+    }
+    
     .feature-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 15px 35px -10px rgba(212, 175, 55, 0.2);
+        background: rgba(40, 40, 40, 0.8);
     }
-
+    
     .project-image {
         border-radius: 12px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         height: 200px;
         object-fit: cover;
         width: 100%;
+        transition: transform 0.5s ease;
     }
-
+    
+    .feature-card:hover .project-image {
+        transform: scale(1.05);
+    }
+    
     .nav-blur {
         backdrop-filter: blur(10px);
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(10, 10, 10, 0.85);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
     }
-
+    
     .section-title {
         position: relative;
         display: inline-block;
     }
-
+    
     .section-title:after {
         content: '';
         position: absolute;
@@ -66,30 +137,37 @@
         left: 0;
         width: 50%;
         height: 4px;
-        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
         border-radius: 2px;
     }
-
+    
     .skill-badge {
-        background: #e6f0ff;
+        background: rgba(212, 175, 55, 0.15);
         border-radius: 20px;
         padding: 6px 14px;
         font-size: 0.85rem;
         margin: 5px;
         display: inline-block;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        transition: all 0.3s ease;
     }
-
+    
+    .skill-badge:hover {
+        background: rgba(212, 175, 55, 0.25);
+        transform: translateY(-2px);
+    }
+    
     .timeline {
-        border-left: 3px solid #3b82f6;
+        border-left: 3px solid var(--gold);
         padding-left: 25px;
         margin-left: 10px;
     }
-
+    
     .timeline-item {
         position: relative;
         margin-bottom: 30px;
     }
-
+    
     .timeline-item:before {
         content: '';
         position: absolute;
@@ -98,85 +176,213 @@
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        background: #3b82f6;
-        border: 3px solid white;
-        box-shadow: 0 0 0 3px #3b82f6;
+        background: var(--gold);
+        border: 3px solid var(--dark);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
     }
-
+    
     .tech-icon {
         font-size: 2.5rem;
         margin: 10px 15px;
-        color: #3b82f6;
+        color: var(--gold);
+        transition: all 0.3s ease;
+    }
+    
+    .tech-icon:hover {
+        color: var(--gold-light);
+        transform: translateY(-5px);
+    }
+    
+    .glow {
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+    
+    .contact-card {
+        background: rgba(30, 30, 30, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(212, 175, 55, 0.1);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px -10px rgba(212, 175, 55, 0.2);
+    }
+    
+    .contact-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+    
+    .social-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(30, 30, 30, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        transform: translateY(-5px);
+        background: var(--gold);
+        color: var(--dark);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    }
+    
+    .floating {
+        animation: floating 6s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+    }
+    
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    .particle {
+        position: absolute;
+        background: var(--gold);
+        border-radius: 50%;
+        opacity: 0.3;
+    }
+    
+    .gold-gradient-text {
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    footer {
+        background: linear-gradient(to top, #0a0a0a, #050505);
+        border-top: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: var(--dark);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--gold);
+        border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--gold-light);
     }
 </style>
 
-<body class="bg-white text-gray-800">
+<body class="bg-darker text-gray-100">
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+    
     <!-- Navigation -->
-    <header class="fixed top-0 left-0 w-full z-50 nav-blur shadow-sm">
+    <header class="fixed top-0 left-0 w-full z-50 nav-blur">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
-                    <i class="fas fa-laptop-code text-white text-lg"></i>
+                <div class="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
+                    <i class="fas fa-laptop-code text-darker text-lg"></i>
                 </div>
-                <h1 class="text-2xl font-bold text-blue-800">Rafael<span class="text-blue-600">Portfolio</span></h1>
+                <h1 class="text-2xl font-bold text-white">Rafael<span class="gold-gradient-text font-bold">Portfolio</span></h1>
             </div>
             <nav class="hidden md:flex space-x-8">
-                <a href="#home" class="text-blue-800 font-medium hover:text-blue-600 transition">Beranda</a>
-                <a href="#about" class="text-gray-600 font-medium hover:text-blue-600 transition">Tentang</a>
-                <a href="#projects" class="text-gray-600 font-medium hover:text-blue-600 transition">Proyek</a>
-                <a href="#skills" class="text-gray-600 font-medium hover:text-blue-600 transition">Keahlian</a>
-                <a href="#contact" class="text-gray-600 font-medium hover:text-blue-600 transition">Kontak</a>
+                <a href="#home" class="text-gold font-medium hover:text-gold-light transition">Beranda</a>
+                <a href="#about" class="text-gray-400 font-medium hover:text-gold-light transition">Tentang</a>
+                <a href="#projects" class="text-gray-400 font-medium hover:text-gold-light transition">Proyek</a>
+                <a href="#skills" class="text-gray-400 font-medium hover:text-gold-light transition">Keahlian</a>
+                <a href="#contact" class="text-gray-400 font-medium hover:text-gold-light transition">Kontak</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <a href="#contact" class="btn-primary text-white px-5 py-2.5 rounded-full font-medium shadow-md">
+                <a href="#contact" class="btn-primary text-darker px-5 py-2.5 rounded-full font-medium shadow-md">
                     Hubungi Saya
                 </a>
-                <button class="md:hidden text-gray-600 focus:outline-none">
+                <button class="md:hidden text-gray-400 focus:outline-none" id="menuToggle">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-darker border-t border-gold/10 py-4" id="mobileMenu">
+            <div class="flex flex-col space-y-3 px-6">
+                <a href="#home" class="text-gold font-medium">Beranda</a>
+                <a href="#about" class="text-gray-400 font-medium">Tentang</a>
+                <a href="#projects" class="text-gray-400 font-medium">Proyek</a>
+                <a href="#skills" class="text-gray-400 font-medium">Keahlian</a>
+                <a href="#contact" class="text-gray-400 font-medium">Kontak</a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-32 pb-20 hero-gradient">
-        <div class="max-w-7xl mx-auto px-6">
+    <section id="home" class="pt-32 pb-20 hero-gradient min-h-screen flex items-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 z-10">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-12 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 text-blue-900">
-                        Rafael Antonius Nababan
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 text-white" data-aos="fade-right">
+                        Rafael Antonius <span class="gold-gradient-text">Nababan</span>
                     </h1>
-                    <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-blue-700">
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gold-light" data-aos="fade-right" data-aos-delay="100">
                         Mahasiswa Manajemen Informatika
                     </h2>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed max-w-xl" data-aos="fade-right" data-aos-delay="200">
                         Politeknik Negeri Medan | Pengembang Sistem Informasi & Aplikasi
                     </p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4" data-aos="fade-right" data-aos-delay="300">
                         <a href="#projects"
-                            class="btn-primary text-white px-6 py-3 rounded-full font-medium shadow-md text-center">
+                            class="btn-primary text-darker px-6 py-3 rounded-full font-medium shadow-md text-center">
                             Lihat Proyek Saya
                         </a>
                         <a href="#contact"
-                            class="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-full font-medium hover:bg-blue-50 transition text-center">
+                            class="border-2 border-gold text-gold px-6 py-3 rounded-full font-medium hover:bg-gold/10 transition text-center">
                             Hubungi Saya
                         </a>
                     </div>
                 </div>
-                <div class="md:w-1/2 relative flex justify-center">
-                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                <div class="md:w-1/2 relative flex justify-center" data-aos="fade-left" data-aos-delay="400">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gold/30 shadow-2xl floating">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                              alt="Rafael Antonius Nababan" 
                              class="w-full h-full object-cover">
                     </div>
-                    <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg z-10 hidden md:block">
+                    <div class="absolute -bottom-6 -left-6 bg-dark p-4 rounded-xl shadow-lg z-10 hidden md:block border border-gold/10" data-aos="fade-up" data-aos-delay="600">
                         <div class="flex items-center">
-                            <div class="bg-blue-100 p-3 rounded-full mr-3">
-                                <i class="fas fa-graduation-cap text-blue-600 text-xl"></i>
+                            <div class="bg-gold/10 p-3 rounded-full mr-3 border border-gold/20">
+                                <i class="fas fa-graduation-cap text-gold text-xl"></i>
                             </div>
                             <div>
-                                <p class="font-bold text-blue-900">Politeknik Negeri Medan</p>
-                                <p class="text-sm text-gray-500">Manajemen Informatika</p>
+                                <p class="font-bold text-white">Politeknik Negeri Medan</p>
+                                <p class="text-sm text-gray-400">Manajemen Informatika</p>
                             </div>
                         </div>
                     </div>
@@ -186,33 +392,40 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
+    <section id="about" class="py-20 bg-darker">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-10">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Politeknik Negeri Medan" class="rounded-2xl shadow-xl w-full">
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-10" data-aos="fade-right">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Politeknik Negeri Medan" class="w-full h-auto">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h4 class="text-xl font-bold text-white">Politeknik Negeri Medan</h4>
+                            <p class="text-gray-300">Kampus Teknologi Unggulan Sumatera Utara</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="md:w-1/2">
-                    <h3 class="section-title text-3xl font-bold text-blue-900 inline-block">Tentang Saya</h3>
-                    <p class="mt-6 text-gray-600 mb-6">
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <h3 class="section-title text-3xl font-bold text-white inline-block">Tentang Saya</h3>
+                    <p class="mt-6 text-gray-400 mb-6">
                         Saya Rafael Antonius Nababan, mahasiswa aktif Program Studi Manajemen Informatika di Politeknik Negeri Medan. 
                         Saya memiliki passion dalam pengembangan perangkat lunak, sistem informasi, dan aplikasi mobile.
                     </p>
                     
                     <div class="mb-8">
-                        <h4 class="text-xl font-bold text-blue-900 mb-4">Pendidikan</h4>
+                        <h4 class="text-xl font-bold text-white mb-4">Pendidikan</h4>
                         <div class="timeline">
                             <div class="timeline-item">
-                                <h5 class="font-bold text-lg">Politeknik Negeri Medan</h5>
-                                <p class="text-blue-600">Manajemen Informatika | 2020 - Sekarang</p>
-                                <p class="text-gray-600 mt-2">Mahasiswa aktif dengan fokus pada pengembangan sistem informasi dan aplikasi.</p>
+                                <h5 class="font-bold text-lg text-white">Politeknik Negeri Medan</h5>
+                                <p class="text-gold">Manajemen Informatika | 2020 - Sekarang</p>
+                                <p class="text-gray-400 mt-2">Mahasiswa aktif dengan fokus pada pengembangan sistem informasi dan aplikasi.</p>
                             </div>
                         </div>
                     </div>
                     
                     <div>
-                        <h4 class="text-xl font-bold text-blue-900 mb-4">Minat & Keahlian</h4>
+                        <h4 class="text-xl font-bold text-white mb-4">Minat & Keahlian</h4>
                         <div class="flex flex-wrap">
                             <span class="skill-badge">Web Development</span>
                             <span class="skill-badge">Mobile App Development</span>
@@ -227,23 +440,23 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-50">
+    <section id="projects" class="py-20 bg-dark">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h3 class="section-title text-3xl font-bold text-blue-900 inline-block">Proyek Saya</h3>
-                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h3 class="section-title text-3xl font-bold text-white inline-block">Proyek Saya</h3>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">
                     Beberapa proyek sistem informasi dan aplikasi yang telah saya kembangkan
                 </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1 -->
-                <div class="feature-card p-6 rounded-2xl border border-gray-100">
+                <div class="feature-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
                     <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                          alt="Sistem Informasi Bengkel Sicepat" 
                          class="project-image mb-4">
-                    <h4 class="text-xl font-bold mb-3 text-blue-900">Sistem Informasi Bengkel Sicepat</h4>
-                    <p class="text-gray-600 mb-4">
+                    <h4 class="text-xl font-bold mb-3 text-white">Sistem Informasi Bengkel Sicepat</h4>
+                    <p class="text-gray-400 mb-4">
                         Sistem informasi manajemen bengkel untuk PT Sicepat Ekspres yang mencakup manajemen inventaris, 
                         penjadwalan perawatan, dan pelacakan riwayat kendaraan.
                     </p>
@@ -256,12 +469,12 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="feature-card p-6 rounded-2xl border border-gray-100">
+                <div class="feature-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
                     <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                          alt="Sistem Informasi Karyawan" 
                          class="project-image mb-4">
-                    <h4 class="text-xl font-bold mb-3 text-blue-900">Sistem Informasi Karyawan</h4>
-                    <p class="text-gray-600 mb-4">
+                    <h4 class="text-xl font-bold mb-3 text-white">Sistem Informasi Karyawan</h4>
+                    <p class="text-gray-400 mb-4">
                         Sistem manajemen karyawan terintegrasi dengan fitur absensi digital, pengajuan cuti, 
                         dan manajemen kinerja untuk perusahaan manufaktur.
                     </p>
@@ -274,12 +487,12 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="feature-card p-6 rounded-2xl border border-gray-100">
+                <div class="feature-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
                     <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                          alt="Aplikasi Android" 
                          class="project-image mb-4">
-                    <h4 class="text-xl font-bold mb-3 text-blue-900">Aplikasi Android E-Commerce</h4>
-                    <p class="text-gray-600 mb-4">
+                    <h4 class="text-xl font-bold mb-3 text-white">Aplikasi Android E-Commerce</h4>
+                    <p class="text-gray-400 mb-4">
                         Aplikasi mobile untuk platform e-commerce dengan fitur pembelian, keranjang belanja, 
                         pembayaran digital, dan pelacakan pengiriman.
                     </p>
@@ -292,12 +505,12 @@
                 </div>
 
                 <!-- Project 4 -->
-                <div class="feature-card p-6 rounded-2xl border border-gray-100">
+                <div class="feature-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
                     <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                          alt="Sistem Informasi Klinik" 
                          class="project-image mb-4">
-                    <h4 class="text-xl font-bold mb-3 text-blue-900">Sistem Informasi Klinik</h4>
-                    <p class="text-gray-600 mb-4">
+                    <h4 class="text-xl font-bold mb-3 text-white">Sistem Informasi Klinik</h4>
+                    <p class="text-gray-400 mb-4">
                         Sistem terintegrasi untuk manajemen klinik dengan fitur pendaftaran online, rekam medis elektronik, 
                         dan manajemen inventaris obat.
                     </p>
@@ -310,12 +523,12 @@
                 </div>
 
                 <!-- Project 5 -->
-                <div class="feature-card p-6 rounded-2xl border border-gray-100">
+                <div class="feature-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
                     <img src="https://images.unsplash.com/photo-1493238792000-8113da705763?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                          alt="Website Showroom Jaecoo Medan" 
                          class="project-image mb-4">
-                    <h4 class="text-xl font-bold mb-3 text-blue-900">Website Showroom Jaecoo Medan</h4>
-                    <p class="text-gray-600 mb-4">
+                    <h4 class="text-xl font-bold mb-3 text-white">Website Showroom Jaecoo Medan</h4>
+                    <p class="text-gray-400 mb-4">
                         Website perusahaan untuk showroom mobil Jaecoo di Medan dengan katalog produk interaktif, 
                         pemesanan test drive, dan manajemen konten.
                     </p>
@@ -326,152 +539,266 @@
                         <span class="skill-badge">PHP</span>
                     </div>
                 </div>
+                
+                <!-- Project 6 -->
+                <div class="feature-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="Sistem Manajemen Inventaris" 
+                         class="project-image mb-4">
+                    <h4 class="text-xl font-bold mb-3 text-white">Sistem Manajemen Inventaris</h4>
+                    <p class="text-gray-400 mb-4">
+                        Sistem inventaris canggih dengan fitur pelacakan real-time, manajemen pemasok, 
+                        dan analitik prediktif untuk perusahaan logistik.
+                    </p>
+                    <div class="flex flex-wrap mb-4">
+                        <span class="skill-badge">Node.js</span>
+                        <span class="skill-badge">Express</span>
+                        <span class="skill-badge">MongoDB</span>
+                        <span class="skill-badge">React.js</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-white">
+    <section id="skills" class="py-20 bg-darker">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h3 class="section-title text-3xl font-bold text-blue-900 inline-block">Keahlian Teknis</h3>
-                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h3 class="section-title text-3xl font-bold text-white inline-block">Keahlian Teknis</h3>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">
                     Teknologi dan tools yang saya kuasai dalam pengembangan perangkat lunak
                 </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center p-6 feature-card rounded-2xl">
+                <div class="text-center p-6 feature-card rounded-2xl" data-aos="fade-up" data-aos-delay="100">
                     <i class="fab fa-html5 tech-icon"></i>
-                    <h4 class="text-xl font-bold mb-2">Frontend Development</h4>
-                    <p class="text-gray-600">
+                    <h4 class="text-xl font-bold mb-2 text-white">Frontend Development</h4>
+                    <p class="text-gray-400">
                         HTML5, CSS3, JavaScript, Bootstrap, React.js, Vue.js
                     </p>
                 </div>
                 
-                <div class="text-center p-6 feature-card rounded-2xl">
+                <div class="text-center p-6 feature-card rounded-2xl" data-aos="fade-up" data-aos-delay="200">
                     <i class="fas fa-server tech-icon"></i>
-                    <h4 class="text-xl font-bold mb-2">Backend Development</h4>
-                    <p class="text-gray-600">
+                    <h4 class="text-xl font-bold mb-2 text-white">Backend Development</h4>
+                    <p class="text-gray-400">
                         PHP, Laravel, Python, Django, Java, Spring Boot, Node.js
                     </p>
                 </div>
                 
-                <div class="text-center p-6 feature-card rounded-2xl">
+                <div class="text-center p-6 feature-card rounded-2xl" data-aos="fade-up" data-aos-delay="300">
                     <i class="fas fa-database tech-icon"></i>
-                    <h4 class="text-xl font-bold mb-2">Database</h4>
-                    <p class="text-gray-600">
+                    <h4 class="text-xl font-bold mb-2 text-white">Database</h4>
+                    <p class="text-gray-400">
                         MySQL, PostgreSQL, MongoDB, Firebase, Database Design
                     </p>
                 </div>
                 
-                <div class="text-center p-6 feature-card rounded-2xl">
+                <div class="text-center p-6 feature-card rounded-2xl" data-aos="fade-up" data-aos-delay="400">
                     <i class="fab fa-android tech-icon"></i>
-                    <h4 class="text-xl font-bold mb-2">Mobile Development</h4>
-                    <p class="text-gray-600">
+                    <h4 class="text-xl font-bold mb-2 text-white">Mobile Development</h4>
+                    <p class="text-gray-400">
                         Android (Java/Kotlin), Flutter, REST API Integration
                     </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center" data-aos="fade-up">
+                <h4 class="text-2xl font-bold text-white mb-8">Pengalaman & Timeline</h4>
+                <div class="max-w-4xl mx-auto">
+                    <div class="relative">
+                        <!-- Vertical Timeline Line -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gold/20"></div>
+                        
+                        <!-- Timeline Items -->
+                        <div class="relative space-y-12">
+                            <!-- Item 1 -->
+                            <div class="flex items-center" data-aos="fade-right">
+                                <div class="w-1/2 pr-12 text-right">
+                                    <div class="bg-dark p-6 rounded-2xl border border-gold/10">
+                                        <h5 class="font-bold text-xl text-white mb-2">Politeknik Negeri Medan</h5>
+                                        <p class="text-gold mb-2">Manajemen Informatika</p>
+                                        <p class="text-gray-400">2020 - Sekarang</p>
+                                        <p class="mt-3 text-gray-300">Mahasiswa aktif dengan fokus pada pengembangan sistem informasi dan aplikasi.</p>
+                                    </div>
+                                </div>
+                                <div class="absolute left-1/2 transform -translate-x-1/2">
+                                    <div class="w-6 h-6 rounded-full bg-gold border-4 border-dark"></div>
+                                </div>
+                                <div class="w-1/2"></div>
+                            </div>
+                            
+                            <!-- Item 2 -->
+                            <div class="flex items-center" data-aos="fade-left">
+                                <div class="w-1/2"></div>
+                                <div class="absolute left-1/2 transform -translate-x-1/2">
+                                    <div class="w-6 h-6 rounded-full bg-gold border-4 border-dark"></div>
+                                </div>
+                                <div class="w-1/2 pl-12">
+                                    <div class="bg-dark p-6 rounded-2xl border border-gold/10">
+                                        <h5 class="font-bold text-xl text-white mb-2">Magang Developer</h5>
+                                        <p class="text-gold mb-2">PT. Teknologi Solusi Indonesia</p>
+                                        <p class="text-gray-400">Juni 2022 - Agustus 2022</p>
+                                        <p class="mt-3 text-gray-300">Pengembangan aplikasi web untuk manajemen inventaris perusahaan.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Item 3 -->
+                            <div class="flex items-center" data-aos="fade-right">
+                                <div class="w-1/2 pr-12 text-right">
+                                    <div class="bg-dark p-6 rounded-2xl border border-gold/10">
+                                        <h5 class="font-bold text-xl text-white mb-2">Freelance Web Developer</h5>
+                                        <p class="text-gold mb-2">Proyek Independen</p>
+                                        <p class="text-gray-400">2021 - Sekarang</p>
+                                        <p class="mt-3 text-gray-300">Membangun website dan aplikasi web untuk berbagai klien lokal.</p>
+                                    </div>
+                                </div>
+                                <div class="absolute left-1/2 transform -translate-x-1/2">
+                                    <div class="w-6 h-6 rounded-full bg-gold border-4 border-dark"></div>
+                                </div>
+                                <div class="w-1/2"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-50">
+    <section id="contact" class="py-20 bg-dark">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h3 class="section-title text-3xl font-bold text-blue-900 inline-block">Hubungi Saya</h3>
-                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
-                    Tertarik bekerja sama? Silakan hubungi saya melalui form atau informasi kontak berikut
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h3 class="section-title text-3xl font-bold text-white inline-block">Hubungi Saya</h3>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">
+                    Tertarik bekerja sama? Silakan hubungi saya melalui informasi kontak berikut
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <form class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-gray-700 font-medium mb-2">Nama Lengkap</label>
-                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <!-- Contact Information -->
+                <div class="contact-card p-8 rounded-2xl" data-aos="fade-right">
+                    <h4 class="text-xl font-bold text-white mb-6">Informasi Kontak</h4>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-gold/10 p-3 rounded-full mr-4 border border-gold/20">
+                                <i class="fas fa-map-marker-alt text-gold"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white">Alamat</h5>
+                                <p class="text-gray-400">Medan, Sumatera Utara, Indonesia</p>
+                            </div>
                         </div>
                         
-                        <div>
-                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <div class="flex items-start">
+                            <div class="bg-gold/10 p-3 rounded-full mr-4 border border-gold/20">
+                                <i class="fas fa-envelope text-gold"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white">Email</h5>
+                                <p class="text-gray-400">rafael.nababan@example.com</p>
+                            </div>
                         </div>
                         
-                        <div>
-                            <label for="message" class="block text-gray-700 font-medium mb-2">Pesan</label>
-                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                        <div class="flex items-start">
+                            <div class="bg-gold/10 p-3 rounded-full mr-4 border border-gold/20">
+                                <i class="fas fa-phone text-gold"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white">Telepon</h5>
+                                <p class="text-gray-400">+62 812 3456 7890</p>
+                            </div>
                         </div>
                         
-                        <button type="submit" class="btn-primary text-white px-6 py-3 rounded-lg font-medium shadow-md w-full">
-                            Kirim Pesan
-                        </button>
-                    </form>
+                        <div class="flex items-start">
+                            <div class="bg-gold/10 p-3 rounded-full mr-4 border border-gold/20">
+                                <i class="fas fa-university text-gold"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white">Pendidikan</h5>
+                                <p class="text-gray-400">Politeknik Negeri Medan<br>Manajemen Informatika</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h5 class="font-bold text-white mb-4">Temui Saya di Media Sosial</h5>
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 
-                <div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg h-full">
-                        <h4 class="text-xl font-bold text-blue-900 mb-6">Informasi Kontak</h4>
-                        
-                        <div class="space-y-5">
-                            <div class="flex items-start">
-                                <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                    <i class="fas fa-map-marker-alt text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <h5 class="font-bold text-gray-800">Alamat</h5>
-                                    <p class="text-gray-600">Medan, Sumatera Utara, Indonesia</p>
-                                </div>
+                <!-- Contact Form Removed -->
+                <!-- Replaced with Achievements/Certificates -->
+                <div class="contact-card p-8 rounded-2xl" data-aos="fade-left">
+                    <h4 class="text-xl font-bold text-white mb-6">Pencapaian & Sertifikat</h4>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-gold/10 p-3 rounded-full mr-4 border border-gold/20">
+                                <i class="fas fa-award text-gold"></i>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                    <i class="fas fa-envelope text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <h5 class="font-bold text-gray-800">Email</h5>
-                                    <p class="text-gray-600">rafael.nababan@example.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                    <i class="fas fa-phone text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <h5 class="font-bold text-gray-800">Telepon</h5>
-                                    <p class="text-gray-600">+62 812 3456 7890</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                    <i class="fas fa-university text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <h5 class="font-bold text-gray-800">Pendidikan</h5>
-                                    <p class="text-gray-600">Politeknik Negeri Medan<br>Manajemen Informatika</p>
-                                </div>
+                            <div>
+                                <h5 class="font-bold text-white">Juara 1 Hackathon Medan</h5>
+                                <p class="text-gray-400">2023 - Pengembangan Aplikasi Inovatif</p>
                             </div>
                         </div>
                         
-                        <div class="mt-8">
-                            <h5 class="font-bold text-gray-800 mb-4">Temui Saya di Media Sosial</h5>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition">
-                                    <i class="fab fa-whatsapp"></i>
-                                </a>
+                        <div class="flex items-start">
+                            <div class="bg-gold/10 p-3 rounded-full mr-4 border border-gold/20">
+                                <i class="fas fa-certificate text-gold"></i>
                             </div>
+                            <div>
+                                <h5 class="font-bold text-white">Sertifikasi Google Cloud</h5>
+                                <p class="text-gray-400">Cloud Developer - 2022</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-gold/10 p-3 rounded-full mr-4 border border-gold/20">
+                                <i class="fas fa-medal text-gold"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white">Beasiswa Prestasi</h5>
+                                <p class="text-gray-400">Politeknik Negeri Medan - 2021, 2022</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-gold/10 p-3 rounded-full mr-4 border border-gold/20">
+                                <i class="fas fa-book text-gold"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white">Asisten Dosen</h5>
+                                <p class="text-gray-400">Pemrograman Web - Semester Genap 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h5 class="font-bold text-white mb-4">Ketersediaan</h5>
+                        <div class="bg-dark border border-gold/10 rounded-xl p-4">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 rounded-full bg-green-500 mr-3"></div>
+                                <p class="text-gray-300">Tersedia untuk proyek freelance dan magang</p>
+                            </div>
+                            <p class="text-gray-400 mt-2 text-sm">Waktu respon: 1-2 hari kerja</p>
                         </div>
                     </div>
                 </div>
@@ -480,50 +807,118 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-blue-900 text-white pt-16 pb-8">
+    <footer class="pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-8 mb-12">
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center">
-                            <i class="fas fa-laptop-code text-white text-lg"></i>
+                        <div class="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
+                            <i class="fas fa-laptop-code text-darker text-lg"></i>
                         </div>
-                        <h2 class="text-xl font-bold">Rafael<span class="text-blue-300">Portfolio</span></h2>
+                        <h2 class="text-xl font-bold text-white">Rafael<span class="gold-gradient-text font-bold">Portfolio</span></h2>
                     </div>
-                    <p class="text-blue-200 mb-4">
+                    <p class="text-gray-400 mb-4">
                         Mahasiswa Manajemen Informatika di Politeknik Negeri Medan yang berfokus pada pengembangan sistem informasi dan aplikasi.
                     </p>
+                    <p class="text-gray-500">"Teknologi adalah seni mengubah dunia"</p>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Navigasi</h3>
+                    <h3 class="text-lg font-bold text-white mb-4">Navigasi</h3>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <ul class="space-y-2">
-                                <li><a href="#home" class="text-blue-200 hover:text-white transition">Beranda</a></li>
-                                <li><a href="#about" class="text-blue-200 hover:text-white transition">Tentang</a></li>
-                                <li><a href="#projects" class="text-blue-200 hover:text-white transition">Proyek</a></li>
+                                <li><a href="#home" class="text-gray-400 hover:text-gold-light transition">Beranda</a></li>
+                                <li><a href="#about" class="text-gray-400 hover:text-gold-light transition">Tentang</a></li>
+                                <li><a href="#projects" class="text-gray-400 hover:text-gold-light transition">Proyek</a></li>
                             </ul>
                         </div>
                         <div>
                             <ul class="space-y-2">
-                                <li><a href="#skills" class="text-blue-200 hover:text-white transition">Keahlian</a></li>
-                                <li><a href="#contact" class="text-blue-200 hover:text-white transition">Kontak</a></li>
+                                <li><a href="#skills" class="text-gray-400 hover:text-gold-light transition">Keahlian</a></li>
+                                <li><a href="#contact" class="text-gray-400 hover:text-gold-light transition">Kontak</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-blue-300 text-sm mb-4 md:mb-0">
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
                     © 2023 Rafael Antonius Nababan. Portfolio Mahasiswa Politeknik Negeri Medan.
                 </p>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-blue-300 hover:text-white text-sm transition">Kebijakan Privasi</a>
+                    <a href="#" class="text-gray-500 hover:text-gold-light text-sm transition">Kebijakan Privasi</a>
+                    <a href="#" class="text-gray-500 hover:text-gold-light text-sm transition">Syarat & Ketentuan</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-in-out'
+        });
+        
+        // Mobile Menu Toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Create Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                
+                // Random animation
+                const animationDuration = Math.random() * 20 + 10;
+                particle.style.animation = `floating ${animationDuration}s infinite ease-in-out`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize particles when page loads
+        window.addEventListener('load', createParticles);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
